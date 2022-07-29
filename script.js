@@ -7,7 +7,7 @@ const ERASER = 'eraser';
 let currentTool = BRUSH; // initial tool set to brush
 let isMouseDown = false;
 
-let size = 8;
+let size = 16;
 
 const board = document.querySelector('.board-container');
 const brushButton = document.querySelector('#brush');
