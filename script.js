@@ -19,15 +19,20 @@ const sizeText = document.querySelector('.size-text');
 
 brushButton.onclick = () => {currentTool = BRUSH;}
 eraserButton.onclick = () => {currentTool = ERASER;}
-document.body.onmousedown = () => {isMouseDown = true}
-document.body.onmouseup = () => {isMouseDown = false}
+// document.body.onmousedown = () => {isMouseDown = true}
+// document.body.onmouseup = () => {isMouseDown = false}
 
 function createBoard() {
     for (let i = 0; i < size * size; i++) {
         const cell = document.createElement('div');
         cell.className = 'cell';
         cell.id = 'cell-' + String(i);
-        cell.style = 'width:' + String((500 / size) - 2) + 'px; height: ' + String((500 / size) - 2) + 'px' // board height/width = 500px => 500 / 16 = 31.25px - 2px bc of border so 29.25px
+        cell.style.backgroundColor = DEFAULT_WHITE 
+
+        // board height/width = 500px => 500 / 16 = 31.25px - 2px bc of border so 29.25px
+        cell.style.width = String((500 / size) - 2) + 'px';
+        cell.style.height = String((500 / size) - 2) + 'px';
+
 
         cell.addEventListener('mouseover', changeColorCell)
 
@@ -38,6 +43,7 @@ function createBoard() {
 }
 
 function changeColorCell(e) {
+    e.preventDefault();
     if (e.type === 'mouseover' && !isMouseDown) {
         return;
     }
@@ -65,7 +71,13 @@ sizeSlider.oninput = () => {
     editGridSize();
 }
 
+window.addEventListener("mousedown", function() {
+    isMouseDown = true;
+})
 
+window.addEventListener("mouseup", function() {
+    isMouseDown = false;
+})
 
 createBoard();
 
